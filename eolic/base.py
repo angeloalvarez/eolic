@@ -3,13 +3,15 @@
 import functools
 from typing import Any, Callable, List, TypeVar, cast
 
+from .config import Settings
 from .integrations.base import Integration
-
 from .listener import EventListenerHandler
 from .meta.singleton import Singleton
 from .remote import EventRemoteTargetHandler
 
 T = TypeVar("T", bound=Callable[..., Any])
+
+settings = Settings()
 
 
 class Eolic(metaclass=Singleton):
@@ -33,6 +35,9 @@ class Eolic(metaclass=Singleton):
         Args:
             remote_targets (List[Any]): A list of remote targets to register.
         """
+        settings_remote_targets = settings.remote_targets
+        remote_targets.extend(settings_remote_targets)
+
         for remote_target in remote_targets:
             self.register_target(remote_target)
 

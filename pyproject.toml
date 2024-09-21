@@ -17,6 +17,7 @@ requests = "^2.32.3"
 fastapi = { version="*", optional= true }
 uvicorn = { version="*", optional= true }
 celery = { version="*", optional= true }
+pydantic-settings = "^2.5.2"
 
 [tool.poetry.extras]
 fastapi = ["fastapi", "uvicorn"]
